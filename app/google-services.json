@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "638527015525",
+    "project_id": "circuito-futuro-fed4d",
+    "storage_bucket": "circuito-futuro-fed4d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638527015525:android:4b206b765d09ae9377548c",
+        "android_client_info": {
+          "package_name": "com.sebastian.circuitofuturo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApxxmASFrGAGxjW1-KCOX04Q5fiL02muo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

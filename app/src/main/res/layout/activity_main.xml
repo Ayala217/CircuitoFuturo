@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="40dp"
+            android:src="@drawable/descarga" />
+
+        <TextView
+            android:id="@+id/tvInicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registro"
+            android:textSize="50sp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:hint="Ingrese su nombre"
+            android:layout_marginTop="35dp"
+            android:padding="20dp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/etCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:hint="Ingrese su correo"
+            android:layout_marginTop="35dp"
+            android:padding="20dp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Ingrese su contraseña"
+            android:padding="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvAlreadyHaveAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:text="¿Ya tiene una cuenta creada?"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/btLogin"
+                android:layout_width="150dp"
+                android:layout_height="65dp"
+                android:text="Ingresar"
+                android:backgroundTint="@color/green"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:layout_row="0"
+                android:layout_column="0" />
+
+            <Button
+                android:id="@+id/btRegister"
+                android:layout_width="150dp"
+                android:layout_height="65dp"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="@color/red"
+                android:text="Enviar correo"
+                android:textSize="20sp" />
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>
