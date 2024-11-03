@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Enviar correo de verificación
+
                     mAuth.currentUser?.sendEmailVerification()
                         ?.addOnCompleteListener { emailTask ->
                             if (emailTask.isSuccessful) {
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                     mAuth.currentUser?.reload()?.addOnCompleteListener { reloadTask ->
                         if (reloadTask.isSuccessful && mAuth.currentUser?.isEmailVerified == true) {
 
-                            val intent = Intent(this@MainActivity, Verificacion::class.java)
+                            val intent = Intent(this@MainActivity, Inicio::class.java)
                             startActivity(intent)
                             finish()
                         } else {

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".Inicio">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Circuito Futuro"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+
+        <TextView
+            android:id="@+id/tvMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu ▶"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+
+        <ImageView
+            android:id="@+id/ivMainImage"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:src="@drawable/descarga2"
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagen principal"
+            app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Somos una asociación de entrenadores que a través de nuestra experiencia..."
+            android:textSize="16sp"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/ivMainImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvDescripcion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardLeft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:cardElevation="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cardRight">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quienes pueden participar\n\nEl circuito futuro acoge deportistas desde los 6 hasta los 18 años..."
+                    android:padding="16dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"/>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardRight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:cardElevation="4dp"
+                app:layout_constraintStart_toEndOf="@id/cardLeft"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sobre las competencias\n\nPor medio de distintos convenios con el circuito futuro los deportistas..."
+                    android:padding="16dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000"/>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tvGaleria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GALERIA"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/cardContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+
+        <TextView
+            android:id="@+id/tvGaleriaDescripcion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Revive con nosotros algunos de los momentos que hacen de Circuito Futuro lo que más amamos"
+            android:textSize="14sp"
+            android:textColor="#000000"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/tvGaleria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
