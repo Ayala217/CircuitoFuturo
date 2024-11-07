@@ -1,0 +1,33 @@
+<!-- res/menu/menu_items.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/IniciarSesion"
+        android:title="Iniciar Sesión" />
+    <item
+        android:id="@+id/Principal"
+        android:title="Principal" />
+    <item
+        android:id="@+id/Inscripciones"
+        android:title="Inscripciones" />
+
+
+    <item
+        android:id="@+id/Programacion"
+        android:title="Programación" />
+
+
+    <item
+        android:id="@+id/Ranking"
+        android:title="Ranking" />
+
+    <item
+        android:id="@+id/Partidos"
+        android:title="Partidos" />
+    <item
+        android:id="@+id/Torneos"
+        android:title="Torneos" />
+    <item
+        android:id="@+id/Galeria"
+        android:title="Galería" />
+
+</menu>
