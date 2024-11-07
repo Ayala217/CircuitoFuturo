@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">CircuitoFuturo</string>
+
+    <string-array name="spinnerCategoria">
+        <item>Bola Roja</item>
+        <item>Bola Naranja</item>
+        <item>Bola Verde</item>
+        <item> 12 Masculino</item>
+        <item> 12 Femenino</item>
+        <item> 14 Masculino</item>
+        <item> 14 Femenino</item>
+        <item> 16 Masculino</item>
+        <item> Novatos </item>
+        <item> Quinta </item>
+        <item> Cuarta </item>
+
+    </string-array>
 </resources>
+
