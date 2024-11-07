@@ -1,19 +1,26 @@
 package com.sebastian.circuitofuturo
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-class inscripcion : AppCompatActivity() {
+class Inscripcion : AppCompatActivity() {
+
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inscripcion)
 
+        // Inicializa Firebase Database
+        database = FirebaseDatabase.getInstance().reference
+
+        // Obtén las referencias de los elementos de la interfaz
         val etNombreDeportista = findViewById<EditText>(R.id.etNombreDeportista)
         val etNumeroIdentificacion = findViewById<EditText>(R.id.etNumeroIdentificacion)
         val etEquipoClubEntrenador = findViewById<EditText>(R.id.etEquipoClubEntrenador)
@@ -24,6 +31,7 @@ class inscripcion : AppCompatActivity() {
         val btnInscribirme = findViewById<Button>(R.id.btnInscribirme)
         val btnCancelar = findViewById<Button>(R.id.btnCancelar)
 
+        // Configura el botón "Inscribirme"
         btnInscribirme.setOnClickListener {
             // Obtén los valores de los campos
             val nombreDeportista = etNombreDeportista.text.toString()
@@ -34,7 +42,7 @@ class inscripcion : AppCompatActivity() {
             val categoriaSeleccionada = spinnerCategoria.selectedItem.toString()
             val telefono = etTelefono.text.toString()
 
-            // Aquí puedes realizar la validación de los campos si es necesario
+            // Validación de campos
             if (nombreDeportista.isEmpty() || numeroIdentificacion.isEmpty() ||
                 equipoClubEntrenador.isEmpty() || correoElectronico.isEmpty() ||
                 fechaNacimiento.isEmpty() || telefono.isEmpty()) {
@@ -43,9 +51,11 @@ class inscripcion : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Aquí se enviaría la información a la base de datos
-            // Por ejemplo:
-            // guardarEnBaseDeDatos(nombreDeportista, numeroIdentificacion, equipoClubEntrenador, correoElectronico, fechaNacimiento, categoriaSeleccionada, telefono)
+            // Guardar datos en Firebase
+            guardarEnFirebase(
+                nombreDeportista, numeroIdentificacion, equipoClubEntrenador,
+                correoElectronico, fechaNacimiento, categoriaSeleccionada, telefono
+            )
 
             // Mensaje de confirmación
             Toast.makeText(this, "Inscripción completada", Toast.LENGTH_SHORT).show()
@@ -66,8 +76,8 @@ class inscripcion : AppCompatActivity() {
         }
     }
 
-    // Método ejemplo para guardar datos en la base de datos (implementa según tu lógica)
-    private fun guardarEnBaseDeDatos(
+    // Método para guardar datos en Firebase Realtime Database
+    private fun guardarEnFirebase(
         nombre: String,
         identificacion: String,
         equipo: String,
@@ -76,7 +86,25 @@ class inscripcion : AppCompatActivity() {
         categoria: String,
         telefono: String
     ) {
-        // Implementa la lógica para guardar en la base de datos
-        // Esta función es un ejemplo y deberás implementarla según tu estructura de base de datos
+        val usuarioId = database.push().key ?: return  // Crea una clave única para cada inscripción
+        val datosUsuario = mapOf(
+            "nombre" to nombre,
+            "identificacion" to identificacion,
+            "equipo" to equipo,
+            "correo" to correo,
+            "fechaNacimiento" to fechaNacimiento,
+            "categoria" to categoria,
+            "telefono" to telefono
+        )
+
+        // Guarda los datos en la referencia de Firebase
+        database.child("inscripciones").child(usuarioId).setValue(datosUsuario)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Error al guardar los datos", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 }
