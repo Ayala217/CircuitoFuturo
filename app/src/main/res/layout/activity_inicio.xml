@@ -143,5 +143,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"/>
 
+        <ImageView
+            android:id="@+id/ivRotatingImage"
+            android:layout_width="373dp"
+            android:layout_height="148dp"
+            android:contentDescription="Imagen rotativa"
+            android:scaleType="centerCrop"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="587dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
