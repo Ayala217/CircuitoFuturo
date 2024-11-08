@@ -34,7 +34,7 @@ open class Menu : AppCompatActivity() {
                     true
                 }
                 R.id.Inscripciones -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, inscripciones::class.java))
                     true
                 }
                 R.id.Programacion -> {

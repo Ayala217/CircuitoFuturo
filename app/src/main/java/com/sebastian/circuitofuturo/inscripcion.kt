@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class Inscripcion : AppCompatActivity() {
+class inscripcion : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
 
