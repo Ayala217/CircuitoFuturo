@@ -1,10 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Recomendaciones">
+    android:background="#FFFFFF"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Título principal -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RECOMENDACIONES IMPORTANTES"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Recomendaciones en un CardView o contenedor -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. Deportistas estar pendientes del llamado de atención para dirigirse al campo"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2. Después de cada llamado el deportista tiene 5 minutos para desplazarse al campo que le corresponde"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3. Calentamiento de juego para el partido máximo de 5 minutos"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4. Cada campo tendrá asignado un tarro de bolas"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5. Los deportistas que se encuentren en el campo serán los responsables del juego de bolas"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6. El mantenimiento para el campo será de 5 minutos"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7. Los deportistas deben permanecer cerca del módulo que se le asigne a su categoría"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8. No utilizar campos si no ha sido autorizado"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9. El ganador debe darle el score a la persona que esté a cargo de su categoría"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10. Al tercer llamado que se le haga al deportista es considerado como W/O"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11. Si su oponente no llega después del llamado usted debe informarle al encargado del modulo"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="15dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
