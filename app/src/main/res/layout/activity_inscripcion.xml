@@ -30,7 +30,6 @@
             android:hint="Ingresa el nombre"
             android:padding="12dp" />
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +64,6 @@
             android:hint="Ingresa el equipo, club o entrenador"
             android:padding="12dp" />
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,7 +81,6 @@
             android:hint="Ingresa el correo electrónico"
             android:inputType="textEmailAddress"
             android:padding="12dp" />
-
 
         <TextView
             android:layout_width="wrap_content"
