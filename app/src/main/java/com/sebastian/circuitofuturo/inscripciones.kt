@@ -18,10 +18,17 @@ class inscripciones : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_inscripciones)
 
+
         val btnInscribirme = findViewById<Button>(R.id.btnInscribirse)
+        val btnRecomendaciones = findViewById<Button>(R.id.btnRecomendar)
 
         btnInscribirme.setOnClickListener {
             val intent = Intent(this@inscripciones, inscripcion::class.java)
+            startActivity(intent)
+        }
+
+        btnRecomendaciones.setOnClickListener {
+            val intent = Intent(this@inscripciones, Recomendaciones::class.java)
             startActivity(intent)
         }
 
