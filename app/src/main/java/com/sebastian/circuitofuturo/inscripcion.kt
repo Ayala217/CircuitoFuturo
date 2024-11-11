@@ -1,110 +1,146 @@
 package com.sebastian.circuitofuturo
 
+import android.app.DatePickerDialog
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Calendar
+import java.util.regex.Pattern
 
 class inscripcion : AppCompatActivity() {
 
-    private lateinit var database: DatabaseReference
+    private lateinit var mDbRef: DatabaseReference
+    private lateinit var editName: EditText
+    private lateinit var editIdentificacion: EditText
+    private lateinit var editEquipo: EditText
+    private lateinit var editFechaNacimiento: EditText
+    private lateinit var editCategoria: Spinner
+    private lateinit var editTelefono: EditText
+    private lateinit var btnInscribirme: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inscripcion)
 
-        // Inicializa Firebase Database
-        database = FirebaseDatabase.getInstance().reference
+        supportActionBar?.hide()
 
-        // Obtén las referencias de los elementos de la interfaz
-        val etNombreDeportista = findViewById<EditText>(R.id.etNombreDeportista)
-        val etNumeroIdentificacion = findViewById<EditText>(R.id.etNumeroIdentificacion)
-        val etEquipoClubEntrenador = findViewById<EditText>(R.id.etEquipoClubEntrenador)
-        val etCorreoElectronico = findViewById<EditText>(R.id.etCorreoElectronico)
-        val etFechaNacimiento = findViewById<EditText>(R.id.etFechaNacimiento)
-        val spinnerCategoria = findViewById<Spinner>(R.id.spinnerCategoria)
-        val etTelefono = findViewById<EditText>(R.id.etTelefono)
-        val btnInscribirme = findViewById<Button>(R.id.btnInscribirme)
-        val btnCancelar = findViewById<Button>(R.id.btnCancelar)
 
-        // Configura el botón "Inscribirme"
+        mDbRef = FirebaseDatabase.getInstance().getReference("users")
+
+
+        editName = findViewById(R.id.etNombreDeportista)
+        editIdentificacion = findViewById(R.id.etNumeroIdentificacion)
+        editEquipo = findViewById(R.id.etEquipoClubEntrenador)
+        editFechaNacimiento = findViewById(R.id.etFechaNacimiento)
+        editCategoria = findViewById(R.id.spinnerCategoria)
+        editTelefono = findViewById(R.id.etTelefono)
+        btnInscribirme = findViewById(R.id.btnInscribirme)
+
+
+        val categorias = arrayOf("Categoria 1", "Categoria 2", "Categoria 3")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categorias)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        editCategoria.adapter = adapter
+
+
+        editFechaNacimiento.setOnClickListener {
+            showDatePickerDialog()
+        }
+
         btnInscribirme.setOnClickListener {
-            // Obtén los valores de los campos
-            val nombreDeportista = etNombreDeportista.text.toString()
-            val numeroIdentificacion = etNumeroIdentificacion.text.toString()
-            val equipoClubEntrenador = etEquipoClubEntrenador.text.toString()
-            val correoElectronico = etCorreoElectronico.text.toString()
-            val fechaNacimiento = etFechaNacimiento.text.toString()
-            val categoriaSeleccionada = spinnerCategoria.selectedItem.toString()
-            val telefono = etTelefono.text.toString()
+            val name = editName.text.toString()
+            val identificacion = editIdentificacion.text.toString()
+            val equipo = editEquipo.text.toString()
+            val fechaNacimiento = editFechaNacimiento.text.toString()
+            val categoria = editCategoria.selectedItem?.toString() ?: "Sin categoría"
+            val telefono = editTelefono.text.toString()
 
-            // Validación de campos
-            if (nombreDeportista.isEmpty() || numeroIdentificacion.isEmpty() ||
-                equipoClubEntrenador.isEmpty() || correoElectronico.isEmpty() ||
-                fechaNacimiento.isEmpty() || telefono.isEmpty()) {
-
-                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            if (validateFields(name, identificacion, equipo, fechaNacimiento, telefono)) {
+                saveUserData(name, identificacion, equipo, fechaNacimiento, categoria, telefono)
             }
-
-            // Guardar datos en Firebase
-            guardarEnFirebase(
-                nombreDeportista, numeroIdentificacion, equipoClubEntrenador,
-                correoElectronico, fechaNacimiento, categoriaSeleccionada, telefono
-            )
-
-            // Mensaje de confirmación
-            Toast.makeText(this, "Inscripción completada", Toast.LENGTH_SHORT).show()
-        }
-
-        // Configura el botón "Cancelar"
-        btnCancelar.setOnClickListener {
-            // Limpia todos los campos
-            etNombreDeportista.text.clear()
-            etNumeroIdentificacion.text.clear()
-            etEquipoClubEntrenador.text.clear()
-            etCorreoElectronico.text.clear()
-            etFechaNacimiento.text.clear()
-            spinnerCategoria.setSelection(0) // Selecciona la primera opción en el Spinner
-            etTelefono.text.clear()
-
-            Toast.makeText(this, "Inscripción cancelada", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // Método para guardar datos en Firebase Realtime Database
-    private fun guardarEnFirebase(
-        nombre: String,
-        identificacion: String,
-        equipo: String,
-        correo: String,
-        fechaNacimiento: String,
-        categoria: String,
-        telefono: String
-    ) {
-        val usuarioId = database.push().key ?: return  // Crea una clave única para cada inscripción
-        val datosUsuario = mapOf(
-            "nombre" to nombre,
-            "identificacion" to identificacion,
-            "equipo" to equipo,
-            "correo" to correo,
-            "fechaNacimiento" to fechaNacimiento,
-            "categoria" to categoria,
-            "telefono" to telefono
-        )
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        // Guarda los datos en la referencia de Firebase
-        database.child("inscripciones").child(usuarioId).setValue(datosUsuario)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Error al guardar los datos", Toast.LENGTH_SHORT).show()
-                }
+        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            val age = year - selectedYear
+            if (age in 10..100) {
+                val formattedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                editFechaNacimiento.setText(formattedDate)
+            } else {
+                Toast.makeText(this, "La edad debe estar entre 10 y 100 años.", Toast.LENGTH_SHORT).show()
             }
+        }, year, month, day)
+
+
+        datePickerDialog.datePicker.maxDate = calendar.timeInMillis
+        datePickerDialog.show()
     }
+
+
+    private fun validateFields(name: String, identificacion: String, equipo: String, fechaNacimiento: String, telefono: String): Boolean {
+        val namePattern = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$"
+        val idPattern = "^\\d{10}$"
+        val phonePattern = "^\\d{10}$"
+
+
+        if (!Pattern.matches(namePattern, name)) {
+            Toast.makeText(this, "El nombre solo debe contener letras y no puede estar vacío.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        if (!Pattern.matches(idPattern, identificacion)) {
+            Toast.makeText(this, "La identificación debe tener 10 dígitos numéricos.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        if (equipo.isBlank()) {
+            Toast.makeText(this, "El campo de equipo no puede estar vacío.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        if (fechaNacimiento.isBlank()) {
+            Toast.makeText(this, "Por favor, seleccione una fecha de nacimiento válida.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        if (!Pattern.matches(phonePattern, telefono)) {
+            Toast.makeText(this, "El teléfono debe tener 10 dígitos numéricos.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
+    }
+
+    private fun saveUserData(name: String, identificacion: String, equipo: String, fechaNacimiento: String, categoria: String, telefono: String) {
+        val userId = mDbRef.push().key ?: return
+        val user = User(name, identificacion, equipo, fechaNacimiento, categoria, telefono)
+        mDbRef.child(userId).setValue(user).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(this, "Inscripción exitosa", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Error en la inscripción", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    data class User(
+        val name: String,
+        val identificacion: String,
+        val equipo: String,
+        val fechaNacimiento: String,
+        val categoria: String,
+        val telefono: String
+    )
 }

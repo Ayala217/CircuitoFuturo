@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var editName: EditText
+
     private lateinit var editEmail: EditText
     private lateinit var editPassword: EditText
     private lateinit var btnSignUp: Button
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        editName = findViewById(R.id.etNombre)
+
         editEmail = findViewById(R.id.etCorreo)
         editPassword = findViewById(R.id.etPassword)
         btnSignUp = findViewById(R.id.btRegister)
@@ -38,11 +38,11 @@ class MainActivity : AppCompatActivity() {
 
 
         btnSignUp.setOnClickListener {
-            val name = editName.text.toString()
+
             val email = editEmail.text.toString()
             val password = editPassword.text.toString()
 
-            signUp(name, email, password)
+            signUp( email, password)
         }
 
 
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun signUp(name: String, email: String, password: String) {
+    private fun signUp( email: String, password: String) {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
