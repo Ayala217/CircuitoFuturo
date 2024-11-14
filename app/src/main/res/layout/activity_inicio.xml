@@ -7,12 +7,13 @@
     android:background="#FFFFFF"
     tools:context=".Inicio">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="16dp">
 
-
+        <!-- Título principal -->
         <TextView
             android:id="@+id/tvTitulo"
             android:layout_width="wrap_content"
@@ -21,8 +22,6 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#000000"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"/>
 
 
@@ -30,92 +29,140 @@
             android:id="@+id/tvMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
             android:text="Menu ▶"
             android:textColor="#000000"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/ivMainImage"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:src="@drawable/descarga2"
-            android:scaleType="centerCrop"
-            android:contentDescription="Imagen principal"
-            app:layout_constraintTop_toBottomOf="@id/tvTitulo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"/>
-
-
-        <TextView
-            android:id="@+id/tvDescripcion"
-            android:layout_width="0dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Somos una asociación de entrenadores que a través de nuestra experiencia..."
-            android:textSize="16sp"
-            android:textColor="#000000"
-            app:layout_constraintTop_toBottomOf="@id/ivMainImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/ivMainImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/descarga2"
+                android:scaleType="centerCrop"
+                android:contentDescription="Imagen principal"
+                android:layout_marginTop="16dp"/>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cardContainer"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/tvDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Somos una asociación de entrenadores que, a través de nuestra experiencia, decidimos crear un espacio por medio del cual se desarrollen eventos deportivos, orientados al mejoramiento competitivo de los deportistas, la promoción de la sana competencia, la integración y la estimulación a los futuros representantes del deporte"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <!-- Contenedor de CardViews -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvDescripcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
             android:layout_marginTop="16dp">
 
-
+            <!-- Primera CardView: Quienes pueden participar -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardLeft"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 app:cardElevation="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cardRight">
+                app:cardCornerRadius="8dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Quienes pueden participar\n\nEl circuito futuro acoge deportistas desde los 6 hasta los 18 años..."
-                    android:padding="16dp"
-                    android:textSize="14sp"
-                    android:textColor="#000000"/>
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quienes pueden participar"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#DDDDDD"
+                        android:layout_marginVertical="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="El circuito futuro acoge deportistas desde los 6 hasta los 18 años (Hasta el puesto 70 en el ranking de la federación) los cuales buscan por medio de la competencia, aportar experiencias deportivas que influyan en el crecimiento personal y promuevan el deporte como proyecto de vida de los participantes, se integran Escuelas de formación, Clubes, Academias, Jugadores independientes de la región. Premiando al final del año los semilleros del circuito por cada categoría y las entidades deportivas con mejores resultados"
+                        android:textSize="14sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-
+            <!-- Segunda CardView: Sobre las Competencias -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardRight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 app:cardElevation="4dp"
-                app:layout_constraintStart_toEndOf="@id/cardLeft"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:cardCornerRadius="8dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sobre las competencias\n\nPor medio de distintos convenios con el circuito futuro los deportistas..."
-                    android:padding="16dp"
-                    android:textSize="14sp"
-                    android:textColor="#000000"/>
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sobre las Competencias"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#DDDDDD"
+                        android:layout_marginVertical="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Por medio de distintos convenios con el circuito futuro los deportistas podrán acceder a descuentos y promociones para la compra de sus equipamientos deportivos. adicionalmente los padres de familia harán parte fundamental en el desarrollo deportivo por medio de talleres y conferencias orientadas por profesionales del área. Contamos con los escenarios del Club La Hacienda Ecci. (19 campos en polvo de ladrillo)."
+                        android:textSize="14sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-
+        <!-- Título de Galería -->
         <TextView
             android:id="@+id/tvGaleria"
             android:layout_width="wrap_content"
@@ -124,33 +171,27 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#000000"
-            app:layout_constraintTop_toBottomOf="@id/cardContainer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="center"
             android:layout_marginTop="16dp"/>
-
 
         <TextView
             android:id="@+id/tvGaleriaDescripcion"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Revive con nosotros algunos de los momentos que hacen de Circuito Futuro lo que más amamos"
             android:textSize="14sp"
             android:textColor="#000000"
             android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/tvGaleria"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"/>
 
+        <!-- Imagen rotativa ubicada al final -->
         <ImageView
             android:id="@+id/ivRotatingImage"
-            android:layout_width="373dp"
+            android:layout_width="match_parent"
             android:layout_height="148dp"
             android:contentDescription="Imagen rotativa"
             android:scaleType="centerCrop"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="587dp" />
+            android:layout_marginTop="16dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>

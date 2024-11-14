@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 class Inicio : AppCompatActivity() {
 
     private lateinit var ivRotatingImage: ImageView
+
     private val imageList = listOf(
         R.drawable.image1,
         R.drawable.image2,
@@ -25,12 +26,12 @@ class Inicio : AppCompatActivity() {
     private var currentIndex = 0
     private val handler = Handler(Looper.getMainLooper())
 
-    // Runnable para rotar imágenes automáticamente
+
     private val imageChangeRunnable = object : Runnable {
         override fun run() {
             ivRotatingImage.setImageResource(imageList[currentIndex])
             currentIndex = (currentIndex + 1) % imageList.size
-            handler.postDelayed(this, 3000) // Cambia cada 3 segundos
+            handler.postDelayed(this, 7000)
         }
     }
 
@@ -43,7 +44,7 @@ class Inicio : AppCompatActivity() {
         val tvMenu: TextView = findViewById(R.id.tvMenu)
         ivRotatingImage = findViewById(R.id.ivRotatingImage) // Asigna el ImageView para rotación de imágenes
 
-        // Inicia la rotación de imágenes
+
         handler.post(imageChangeRunnable)
 
         tvMenu.setOnClickListener { view ->

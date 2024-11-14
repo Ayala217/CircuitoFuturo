@@ -39,7 +39,7 @@ class Inscribirse : AppCompatActivity() {
         }
 
         btnInscribirme.setOnClickListener {
-            // Obtén los valores de los campos
+
             val nombreDeportista = etNombreDeportista.text.toString()
             val numeroIdentificacion = etNumeroIdentificacion.text.toString()
             val equipoClubEntrenador = etEquipoClubEntrenador.text.toString()
@@ -48,7 +48,7 @@ class Inscribirse : AppCompatActivity() {
             val categoriaSeleccionada = spinnerCategoria.selectedItem.toString()
             val telefono = etTelefono.text.toString()
 
-            // Validación de campos
+
             if (nombreDeportista.isEmpty() || numeroIdentificacion.isEmpty() ||
                 equipoClubEntrenador.isEmpty() || correoElectronico.isEmpty() ||
                 fechaNacimiento.isEmpty() || telefono.isEmpty()) {
