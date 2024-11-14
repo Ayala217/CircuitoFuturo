@@ -90,4 +90,15 @@ class Galeria : Menu() {
             }
         }
     }
+
+    private val selectedImages = mutableListOf<Uri>()
+
+    private fun addImageToList(uri: Uri) {
+        selectedImages.add(uri)
+        // Luego de seleccionar todas las imágenes
+        val intent = Intent(this, Inicio::class.java)
+        intent.putParcelableArrayListExtra("IMAGES", ArrayList(selectedImages))
+        startActivity(intent)
+    }
+
 }

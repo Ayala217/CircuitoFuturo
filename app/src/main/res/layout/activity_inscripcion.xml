@@ -141,13 +141,14 @@
                 android:id="@+id/btnInscribirme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inscribirme"
-                android:backgroundTint="#3A3A3A"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
+
                 android:layout_marginEnd="8dp"
+                android:backgroundTint="#3A3A3A"
                 android:elevation="4dp"
-                android:padding="12dp"/>
+                android:padding="12dp"
+                android:text="Inscribirme"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnCancelar"
