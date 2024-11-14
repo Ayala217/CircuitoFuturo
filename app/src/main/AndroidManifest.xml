@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CircuitoFuturo"
         tools:targetApi="31">
+
+
+        <activity
+            android:name=".Programacion"
+            android:exported="false" />
         <activity
             android:name=".Inscribirse"
             android:exported="false" />
@@ -19,29 +24,25 @@
             android:name=".Recomendaciones"
             android:exported="false" />
         <activity
-            android:name=".Programacion"
-            android:exported="false" />
-        <activity
-            android:name=".inscripcion"
-            android:exported="false" />
-        <activity
             android:name=".inscripciones"
             android:exported="false" />
         <activity
             android:name=".Inicio"
-            android:exported="true">
+            android:exported="false" />
+
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Login"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
     </application>
 
 </manifest>

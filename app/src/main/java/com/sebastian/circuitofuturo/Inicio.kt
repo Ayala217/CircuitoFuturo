@@ -70,12 +70,12 @@ class Inicio : AppCompatActivity() {
                     true
                 }
                 R.id.Inscripciones -> {
-                    val intent = Intent(this@Inicio, MainActivity::class.java)
+                    val intent = Intent(this@Inicio, inscripciones::class.java)
                     startActivity(intent)
                     true
                 }
                 R.id.Programacion -> {
-                    val intent = Intent(this@Inicio, MainActivity::class.java)
+                    val intent = Intent(this@Inicio, Programacion::class.java)
                     startActivity(intent)
                     true
                 }

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class ProgramacionActivity : AppCompatActivity() {
+class Programacion : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
     private lateinit var pdfWebView: WebView
