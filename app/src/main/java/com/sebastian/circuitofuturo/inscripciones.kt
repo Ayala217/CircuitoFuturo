@@ -23,7 +23,7 @@ class inscripciones : AppCompatActivity() {
         val btnRecomendaciones = findViewById<Button>(R.id.btnRecomendar)
 
         btnInscribirme.setOnClickListener {
-            val intent = Intent(this@inscripciones, inscripcion::class.java)
+            val intent = Intent(this@inscripciones, Inscribirse::class.java)
             startActivity(intent)
         }
 

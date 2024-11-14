@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class Inscripcion : AppCompatActivity() {
+class Inscribirse : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inscripcion)
+        setContentView(R.layout.activity_inscribirse)
 
         // Inicializa Firebase Database
         database = FirebaseDatabase.getInstance().reference
