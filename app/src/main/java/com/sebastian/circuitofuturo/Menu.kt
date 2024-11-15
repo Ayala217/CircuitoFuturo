@@ -25,41 +25,51 @@ open class Menu : AppCompatActivity() {
 
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
-                R.id.IniciarSesion -> {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    true
-                }
+
                 R.id.Principal -> {
-                    startActivity(Intent(this, Inicio::class.java))
+                    val intent = Intent(this@Menu, Inicio::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.Inscripciones -> {
-                    startActivity(Intent(this, inscripciones::class.java))
+                    val intent = Intent(this@Menu, inscripciones::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.Programacion -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent = Intent(this@Menu, programacion::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.Ranking -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent = Intent(this@Menu, MainActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.Partidos -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent = Intent(this@Menu, MainActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.Torneos -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent = Intent(this@Menu, MainActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.Galeria -> {
-                    startActivity(Intent(this, Galeria::class.java))
+                    val intent = Intent(this@Menu, MainActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.Recomendaciones -> {
+                    val intent = Intent(this@Menu, Recomendaciones::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false
             }
         }
-        popupMenu.show()
+        popupMenu.show() // Muestra el menú emergente
     }
 }

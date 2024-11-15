@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 import java.util.regex.Pattern
 
-class inscripcion : AppCompatActivity() {
+class inscripcion : Menu() {
 
     private lateinit var mDbRef: DatabaseReference
     private lateinit var editName: EditText
@@ -25,6 +25,11 @@ class inscripcion : AppCompatActivity() {
         setContentView(R.layout.activity_inscripcion)
 
         supportActionBar?.hide()
+
+        setContentView(R.layout.activity_inicio)
+
+        val tvMenu: TextView = findViewById(R.id.tvMenu)
+        setupMenu(tvMenu)
 
 
         mDbRef = FirebaseDatabase.getInstance().getReference("users")
