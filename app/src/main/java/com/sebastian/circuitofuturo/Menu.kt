@@ -57,7 +57,7 @@ open class Menu : AppCompatActivity() {
                     true
                 }
                 R.id.Galeria -> {
-                    val intent = Intent(this@Menu, MainActivity::class.java)
+                    val intent = Intent(this@Menu, Galeria::class.java)
                     startActivity(intent)
                     true
                 }
@@ -70,6 +70,6 @@ open class Menu : AppCompatActivity() {
                 else -> false
             }
         }
-        popupMenu.show() // Muestra el menú emergente
+        popupMenu.show()
     }
 }

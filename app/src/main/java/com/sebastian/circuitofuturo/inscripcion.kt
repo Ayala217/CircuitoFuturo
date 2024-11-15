@@ -1,6 +1,5 @@
 package com.sebastian.circuitofuturo
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,9 @@ class inscripcion : Menu() {
     private lateinit var editName: EditText
     private lateinit var editIdentificacion: EditText
     private lateinit var editEquipo: EditText
-    private lateinit var editFechaNacimiento: EditText
+    private lateinit var spinnerYear: Spinner
+    private lateinit var spinnerMonth: Spinner
+    private lateinit var spinnerDay: Spinner
     private lateinit var editCategoria: Spinner
     private lateinit var editTelefono: EditText
     private lateinit var btnInscribirme: Button
@@ -26,39 +27,32 @@ class inscripcion : Menu() {
 
         supportActionBar?.hide()
 
-        setContentView(R.layout.activity_inicio)
-
         val tvMenu: TextView = findViewById(R.id.tvMenu)
         setupMenu(tvMenu)
 
-
         mDbRef = FirebaseDatabase.getInstance().getReference("users")
-
 
         editName = findViewById(R.id.etNombreDeportista)
         editIdentificacion = findViewById(R.id.etNumeroIdentificacion)
         editEquipo = findViewById(R.id.etEquipoClubEntrenador)
-        editFechaNacimiento = findViewById(R.id.etFechaNacimiento)
+        spinnerYear = findViewById(R.id.spinnerYear)
+        spinnerMonth = findViewById(R.id.spinnerMonth)
+        spinnerDay = findViewById(R.id.spinnerDay)
         editCategoria = findViewById(R.id.spinnerCategoria)
         editTelefono = findViewById(R.id.etTelefono)
         btnInscribirme = findViewById(R.id.btnInscribirme)
 
-
-        val categorias = arrayOf("Categoria 1", "Categoria 2", "Categoria 3")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categorias)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        editCategoria.adapter = adapter
-
-
-        editFechaNacimiento.setOnClickListener {
-            showDatePickerDialog()
-        }
+        setupDateSpinners()
+        setupCategoriaSpinner()
 
         btnInscribirme.setOnClickListener {
             val name = editName.text.toString()
             val identificacion = editIdentificacion.text.toString()
             val equipo = editEquipo.text.toString()
-            val fechaNacimiento = editFechaNacimiento.text.toString()
+            val year = spinnerYear.selectedItem.toString()
+            val month = spinnerMonth.selectedItem.toString()
+            val day = spinnerDay.selectedItem.toString()
+            val fechaNacimiento = "$day/$month/$year"
             val categoria = editCategoria.selectedItem?.toString() ?: "Sin categoría"
             val telefono = editTelefono.text.toString()
 
@@ -68,57 +62,48 @@ class inscripcion : Menu() {
         }
     }
 
-    private fun showDatePickerDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+    private fun setupDateSpinners() {
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        val years = (1950..currentYear).toList()
+        val months = (1..12).toList()
+        val days = (1..30).toList()
 
-        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-            val age = year - selectedYear
-            if (age in 10..100) {
-                val formattedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                editFechaNacimiento.setText(formattedDate)
-            } else {
-                Toast.makeText(this, "La edad debe estar entre 10 y 100 años.", Toast.LENGTH_SHORT).show()
-            }
-        }, year, month, day)
-
-
-        datePickerDialog.datePicker.maxDate = calendar.timeInMillis
-        datePickerDialog.show()
+        spinnerYear.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
+        spinnerMonth.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, months)
+        spinnerDay.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, days)
     }
 
+    private fun setupCategoriaSpinner() {
+        val categorias = arrayOf("Categoria 1", "Categoria 2", "Categoria 3")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categorias)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        editCategoria.adapter = adapter
+    }
 
     private fun validateFields(name: String, identificacion: String, equipo: String, fechaNacimiento: String, telefono: String): Boolean {
         val namePattern = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$"
         val idPattern = "^\\d{10}$"
         val phonePattern = "^\\d{10}$"
 
-
         if (!Pattern.matches(namePattern, name)) {
             Toast.makeText(this, "El nombre solo debe contener letras y no puede estar vacío.", Toast.LENGTH_SHORT).show()
             return false
         }
-
 
         if (!Pattern.matches(idPattern, identificacion)) {
             Toast.makeText(this, "La identificación debe tener 10 dígitos numéricos.", Toast.LENGTH_SHORT).show()
             return false
         }
 
-
         if (equipo.isBlank()) {
             Toast.makeText(this, "El campo de equipo no puede estar vacío.", Toast.LENGTH_SHORT).show()
             return false
         }
 
-
         if (fechaNacimiento.isBlank()) {
-            Toast.makeText(this, "Por favor, seleccione una fecha de nacimiento válida.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Por favor, seleccione una fecha válida.", Toast.LENGTH_SHORT).show()
             return false
         }
-
 
         if (!Pattern.matches(phonePattern, telefono)) {
             Toast.makeText(this, "El teléfono debe tener 10 dígitos numéricos.", Toast.LENGTH_SHORT).show()
