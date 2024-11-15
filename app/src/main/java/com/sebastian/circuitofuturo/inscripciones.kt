@@ -20,11 +20,18 @@ class inscripciones : Menu() {
         setContentView(R.layout.activity_inscripciones)
 
         val btnInscribirme = findViewById<Button>(R.id.btnInscribirse)
+        val btnRecomendaciones= findViewById<Button>(R.id.btnRecomend)
 
         val tvMenu: TextView = findViewById(R.id.tvMenu)
         setupMenu(tvMenu)
 
         btnInscribirme.setOnClickListener {
+            val intent = Intent(this@inscripciones, inscripcion::class.java)
+            startActivity(intent)
+        }
+
+
+        btnRecomendaciones.setOnClickListener {
             val intent = Intent(this@inscripciones, inscripcion::class.java)
             startActivity(intent)
         }
