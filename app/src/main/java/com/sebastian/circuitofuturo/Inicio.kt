@@ -59,11 +59,7 @@ class Inicio : AppCompatActivity() {
         // Maneja los clics en las opciones del menú
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
-                R.id.IniciarSesion -> {
-                    val intent = Intent(this@Inicio, MainActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
+
                 R.id.Principal -> {
                     val intent = Intent(this@Inicio, Inicio::class.java)
                     startActivity(intent)
@@ -96,6 +92,12 @@ class Inicio : AppCompatActivity() {
                 }
                 R.id.Galeria -> {
                     val intent = Intent(this@Inicio, MainActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.recomendaciones -> {
+                    val intent = Intent(this@Inicio, Recomendaciones::class.java)
                     startActivity(intent)
                     true
                 }
