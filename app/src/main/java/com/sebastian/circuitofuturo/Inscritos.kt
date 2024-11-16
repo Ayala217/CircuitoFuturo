@@ -46,6 +46,11 @@ class Inscritos : AppCompatActivity() {
         mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val torneos = snapshot.children.map { it.key.toString() }
+                if (torneos.isEmpty()) {
+                    Toast.makeText(this@Inscritos, "No hay torneos disponibles", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 val adapter = ArrayAdapter(this@Inscritos, android.R.layout.simple_spinner_item, torneos)
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerTorneo.adapter = adapter
@@ -67,9 +72,16 @@ class Inscritos : AppCompatActivity() {
     }
 
     private fun cargarParticipantes(torneo: String) {
-        mDbRef.child(torneo).child("participantes").addValueEventListener(object : ValueEventListener {
+        mDbRef.child(torneo).child("participantes").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 listaParticipantes.clear()
+
+                if (!snapshot.exists()) {
+                    Toast.makeText(this@Inscritos, "No hay participantes en este torneo", Toast.LENGTH_SHORT).show()
+                    mostrarDatos(listaParticipantes)
+                    return
+                }
+
                 snapshot.children.forEach { data ->
                     val participante = data.getValue(Participante::class.java)
                     if (participante != null) {
@@ -88,13 +100,22 @@ class Inscritos : AppCompatActivity() {
     private fun mostrarDatos(participantes: List<Participante>) {
         tablaDatos.removeAllViews()
 
+        if (participantes.isEmpty()) {
+            val emptyView = TextView(this)
+            emptyView.text = "No hay participantes disponibles"
+            emptyView.textSize = 16f
+            emptyView.setTextColor(getColor(android.R.color.black))
+            emptyView.setPadding(16, 16, 16, 16)
+            tablaDatos.addView(emptyView)
+            return
+        }
+
         participantes.forEach { participante ->
             val fila = layoutInflater.inflate(R.layout.fila_participante, null)
 
             val tvDeportista = fila.findViewById<TextView>(R.id.tvDeportista)
             val tvEquipo = fila.findViewById<TextView>(R.id.tvEquipo)
             val tvCategoria = fila.findViewById<TextView>(R.id.tvCategoria)
-
 
             tvDeportista.text = participante.nombre
             tvEquipo.text = participante.equipo
@@ -108,7 +129,11 @@ class Inscritos : AppCompatActivity() {
         val listaFiltrada = if (query.isEmpty()) {
             listaParticipantes
         } else {
-            listaParticipantes.filter { it.nombre.contains(query, ignoreCase = true) || it.equipo.contains(query, ignoreCase = true) }
+            listaParticipantes.filter {
+                it.nombre.contains(query, ignoreCase = true) ||
+                        it.equipo.contains(query, ignoreCase = true) ||
+                        it.categoria.contains(query, ignoreCase = true)
+            }
         }
         mostrarDatos(listaFiltrada)
     }
