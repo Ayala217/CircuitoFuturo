@@ -21,6 +21,7 @@ class inscripcion : Menu() {
     private lateinit var editCategoria: Spinner
     private lateinit var editTelefono: EditText
     private lateinit var btnInscribirme: Button
+    private lateinit var editTorneo: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ class inscripcion : Menu() {
         val tvMenu: TextView = findViewById(R.id.tvMenu)
         setupMenu(tvMenu)
 
-        mDbRef = FirebaseDatabase.getInstance().getReference("users")
+        mDbRef = FirebaseDatabase.getInstance().getReference("torneos")
 
         editName = findViewById(R.id.etNombreDeportista)
         editIdentificacion = findViewById(R.id.etNumeroIdentificacion)
@@ -42,9 +43,11 @@ class inscripcion : Menu() {
         editCategoria = findViewById(R.id.spinnerCategoria)
         editTelefono = findViewById(R.id.etTelefono)
         btnInscribirme = findViewById(R.id.btnInscribirme)
+        editTorneo = findViewById(R.id.spinnerTorneo)
 
         setupDateSpinners()
         setupCategoriaSpinner()
+        setupTorneoSpinner() // Configura el spinner para los torneos
 
         btnInscribirme.setOnClickListener {
             val name = editName.text.toString()
@@ -56,9 +59,10 @@ class inscripcion : Menu() {
             val fechaNacimiento = "$day/$month/$year"
             val categoria = editCategoria.selectedItem?.toString() ?: "Sin categoría"
             val telefono = editTelefono.text.toString()
+            val torneo = editTorneo.selectedItem?.toString() ?: "Torneo desconocido"
 
             if (validateFields(name, identificacion, equipo, fechaNacimiento, telefono)) {
-                saveUserData(name, identificacion, equipo, fechaNacimiento, categoria, telefono)
+                saveUserData(name, identificacion, equipo, fechaNacimiento, categoria, telefono, torneo)
             }
         }
     }
@@ -79,6 +83,13 @@ class inscripcion : Menu() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categorias)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         editCategoria.adapter = adapter
+    }
+
+    private fun setupTorneoSpinner() {
+        val torneos = arrayOf("Torneo A", "Torneo B", "Torneo C") // Lista de torneos disponibles
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, torneos)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        editTorneo.adapter = adapter
     }
 
     private fun validateFields(name: String, identificacion: String, equipo: String, fechaNacimiento: String, telefono: String): Boolean {
@@ -114,25 +125,26 @@ class inscripcion : Menu() {
         return true
     }
 
-    private fun saveUserData(name: String, identificacion: String, equipo: String, fechaNacimiento: String, categoria: String, telefono: String) {
-        val auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val userId = currentUser.uid // Usa el UID del usuario autenticado
-            val user = User(name, identificacion, equipo, fechaNacimiento, categoria, telefono)
+    private fun saveUserData(
+        name: String,
+        identificacion: String,
+        equipo: String,
+        fechaNacimiento: String,
+        categoria: String,
+        telefono: String,
+        torneo: String
+    ) {
+        val user = User(name, identificacion, equipo, fechaNacimiento, categoria, telefono)
 
-            mDbRef.child(userId).setValue(user).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(this, "Inscripción exitosa", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Error en la inscripción", Toast.LENGTH_SHORT).show()
-                }
+        // Guardar bajo el nodo del torneo seleccionado
+        mDbRef.child(torneo).child(identificacion).setValue(user).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(this, "Inscripción exitosa en $torneo", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Error al inscribir en $torneo", Toast.LENGTH_SHORT).show()
             }
-        } else {
-            Toast.makeText(this, "Error: No hay usuario autenticado.", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     data class User(
         val name: String,
