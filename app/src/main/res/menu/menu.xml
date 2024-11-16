@@ -32,6 +32,11 @@
     <item
         android:id="@+id/Torneos"
         android:title="Torneos" />
+
+
+    <item
+        android:id="@+id/inscritos"
+        android:title="Inscritos" />
     <item
         android:id="@+id/Galeria"
         android:title="Galería" />

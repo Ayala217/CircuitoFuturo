@@ -72,6 +72,12 @@ open class Menu : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+
+                R.id.inscritos -> {
+                    val intent = Intent(this@Menu, Inscritos::class.java)
+                    startActivity(intent)
+                    true
+                }
                 else -> false
             }
         }
