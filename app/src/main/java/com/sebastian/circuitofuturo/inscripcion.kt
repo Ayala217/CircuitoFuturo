@@ -79,14 +79,14 @@ class inscripcion : Menu() {
     }
 
     private fun setupCategoriaSpinner() {
-        val categorias = arrayOf("Categoria 1", "Categoria 2", "Categoria 3")
+        val categorias = resources.getStringArray(R.array.spinnerCategoria)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categorias)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         editCategoria.adapter = adapter
     }
 
     private fun setupTorneoSpinner() {
-        val torneos = arrayOf("Torneo A", "Torneo B", "Torneo C") // Lista de torneos disponibles
+        val torneos = resources.getStringArray(R.array.spinnerTorneo)// Lista de torneos disponibles
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, torneos)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         editTorneo.adapter = adapter
