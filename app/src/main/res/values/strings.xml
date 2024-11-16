@@ -17,17 +17,12 @@
     </string-array>
 
     <string-array name="spinnerTorneo">
-        <item>Bola Roja</item>
-        <item>Bola Naranja</item>
-        <item>Bola Verde</item>
-        <item> 12 Masculino</item>
-        <item> 12 Femenino</item>
-        <item> 14 Masculino</item>
-        <item> 14 Femenino</item>
-        <item> 16 Masculino</item>
-        <item> Novatos </item>
-        <item> Quinta </item>
-        <item> Cuarta </item>
+        <item>1ra Parada</item>
+        <item>2da Parada</item>
+        <item>3ra Paradae</item>
+        <item>4ta Parada</item>
+        <item>5ta Parada </item>
+        <item> Master </item>
 
     </string-array>
 </resources>
