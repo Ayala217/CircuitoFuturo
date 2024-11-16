@@ -1,43 +1,51 @@
 package com.sebastian.circuitofuturo
 
-import android.content.Intent
-import android.net.Uri
+
+
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import android.widget.PopupMenu
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
+import android.os.Handler
+import android.os.Looper
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.sebastian.circuitofuturo.R
 
-class Inicio : Menu() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+class Inicio : AppCompatActivity() {
 
-        setContentView(R.layout.activity_inicio)
+    private lateinit var ivRotatingImage: ImageView
+    private val images = arrayOf(
+        R.drawable.image1,  // Reemplaza con los nombres de tus imágenes
+        R.drawable.image2,
+        R.drawable.image3
+    )
+    private var currentImageIndex = 0
+    private val handler = Handler(Looper.getMainLooper())
 
-        val tvMenu: TextView = findViewById(R.id.tvMenu)
-        setupMenu(tvMenu)
-
-        val imageUris = intent.getParcelableArrayListExtra<Uri>("IMAGES") ?: listOf()
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerGaleria)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = GaleriaAdapter(imageUris)
-
-
+    private val imageSwitcher = object : Runnable {
+        override fun run() {
+            // Cambia la imagen
+            ivRotatingImage.setImageResource(images[currentImageIndex])
+            currentImageIndex = (currentImageIndex + 1) % images.size
+            // Ejecuta el Runnable nuevamente después de 3 segundos (3000 ms)
+            handler.postDelayed(this, 3000)
+        }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_inicio)
 
+        ivRotatingImage = findViewById(R.id.ivRotatingImage)
+
+        // Inicia el cambio de imágenes
+        handler.post(imageSwitcher)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Detiene el cambio de imágenes cuando la actividad es destruida
+        handler.removeCallbacks(imageSwitcher)
+    }
 }
-
-
-
-
 
 
 
