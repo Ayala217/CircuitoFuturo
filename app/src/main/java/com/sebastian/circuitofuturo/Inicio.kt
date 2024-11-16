@@ -1,15 +1,13 @@
 package com.sebastian.circuitofuturo
 
-
-
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.sebastian.circuitofuturo.R
 
-class Inicio : AppCompatActivity() {
+class Inicio : Menu() {
 
     private lateinit var ivRotatingImage: ImageView
     private val images = arrayOf(
@@ -34,6 +32,10 @@ class Inicio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
+        // Configurar el botón del menú
+        val tvMenu: TextView = findViewById(R.id.tvMenu)
+        setupMenu(tvMenu) // Este método viene de la clase Menu
+
         ivRotatingImage = findViewById(R.id.ivRotatingImage)
 
         // Inicia el cambio de imágenes
@@ -46,6 +48,3 @@ class Inicio : AppCompatActivity() {
         handler.removeCallbacks(imageSwitcher)
     }
 }
-
-
-

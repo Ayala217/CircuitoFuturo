@@ -12,8 +12,6 @@ import androidx.core.view.WindowInsetsCompat
 
 class inscripciones : Menu() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
