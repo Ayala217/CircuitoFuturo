@@ -3,6 +3,7 @@ package com.sebastian.circuitofuturo
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
@@ -114,16 +115,24 @@ class inscripcion : Menu() {
     }
 
     private fun saveUserData(name: String, identificacion: String, equipo: String, fechaNacimiento: String, categoria: String, telefono: String) {
-        val userId = mDbRef.push().key ?: return
-        val user = User(name, identificacion, equipo, fechaNacimiento, categoria, telefono)
-        mDbRef.child(userId).setValue(user).addOnCompleteListener {
-            if (it.isSuccessful) {
-                Toast.makeText(this, "Inscripción exitosa", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Error en la inscripción", Toast.LENGTH_SHORT).show()
+        val auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid // Usa el UID del usuario autenticado
+            val user = User(name, identificacion, equipo, fechaNacimiento, categoria, telefono)
+
+            mDbRef.child(userId).setValue(user).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(this, "Inscripción exitosa", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Error en la inscripción", Toast.LENGTH_SHORT).show()
+                }
             }
+        } else {
+            Toast.makeText(this, "Error: No hay usuario autenticado.", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     data class User(
         val name: String,

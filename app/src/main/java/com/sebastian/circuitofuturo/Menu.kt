@@ -67,6 +67,12 @@ open class Menu : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+
+                R.id.Perfil -> {
+                    val intent = Intent(this@Menu, Perfil::class.java)
+                    startActivity(intent)
+                    true
+                }
                 else -> false
             }
         }
