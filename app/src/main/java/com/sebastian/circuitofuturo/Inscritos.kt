@@ -45,7 +45,7 @@ class Inscritos : AppCompatActivity() {
     private fun setupSpinner() {
         mDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val torneos = snapshot.children.map { it.key.toString() }
+                val torneos = snapshot.children.map { it.key.toString() } // Obtiene los nombres de los torneos
                 if (torneos.isEmpty()) {
                     Toast.makeText(this@Inscritos, "No hay torneos disponibles", Toast.LENGTH_SHORT).show()
                     return
@@ -55,10 +55,11 @@ class Inscritos : AppCompatActivity() {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerTorneo.adapter = adapter
 
+                // Escuchar selección de torneos
                 spinnerTorneo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         torneoSeleccionado = torneos[position]
-                        cargarParticipantes(torneoSeleccionado)
+                        cargarParticipantes(torneoSeleccionado) // Carga participantes del torneo seleccionado
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -72,7 +73,8 @@ class Inscritos : AppCompatActivity() {
     }
 
     private fun cargarParticipantes(torneo: String) {
-        mDbRef.child(torneo).child("participantes").addListenerForSingleValueEvent(object : ValueEventListener {
+        // Accedemos al nodo del torneo seleccionado
+        mDbRef.child(torneo).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 listaParticipantes.clear()
 
@@ -86,16 +88,21 @@ class Inscritos : AppCompatActivity() {
                     val participante = data.getValue(Participante::class.java)
                     if (participante != null) {
                         listaParticipantes.add(participante)
+                        println("Cargado: ${participante.name}, ${participante.equipo}, ${participante.categoria}")
+                    } else {
+                        println("Error al mapear los datos del nodo: ${data.key}")
                     }
                 }
                 mostrarDatos(listaParticipantes)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@Inscritos, "Error al cargar participantes: ${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@Inscritos, "Error al cargar datos: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
+
+
 
     private fun mostrarDatos(participantes: List<Participante>) {
         tablaDatos.removeAllViews()
@@ -113,11 +120,11 @@ class Inscritos : AppCompatActivity() {
         participantes.forEach { participante ->
             val fila = layoutInflater.inflate(R.layout.fila_participante, null)
 
-            val tvDeportista = fila.findViewById<TextView>(R.id.tvDeportista)
+            val tvDeportista = fila.findViewById<TextView>(R.id.tvNombre)
             val tvEquipo = fila.findViewById<TextView>(R.id.tvEquipo)
             val tvCategoria = fila.findViewById<TextView>(R.id.tvCategoria)
 
-            tvDeportista.text = participante.nombre
+            tvDeportista.text = participante.name
             tvEquipo.text = participante.equipo
             tvCategoria.text = participante.categoria
 
@@ -130,7 +137,7 @@ class Inscritos : AppCompatActivity() {
             listaParticipantes
         } else {
             listaParticipantes.filter {
-                it.nombre.contains(query, ignoreCase = true) ||
+                it.name.contains(query, ignoreCase = true) ||
                         it.equipo.contains(query, ignoreCase = true) ||
                         it.categoria.contains(query, ignoreCase = true)
             }
@@ -139,9 +146,12 @@ class Inscritos : AppCompatActivity() {
     }
 
     data class Participante(
-        val nombre: String = "",
+        val name: String = "", // En lugar de "nombre"
         val equipo: String = "",
         val categoria: String = "",
-        val estado: String = ""
+        val fechaNacimiento: String = "",
+        val identificacion: String = "",
+        val telefono: String = ""
     )
+
 }

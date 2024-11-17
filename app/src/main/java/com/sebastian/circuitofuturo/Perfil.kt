@@ -52,52 +52,54 @@ class Perfil : Menu() {
         // Cargar datos del usuario y foto
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val userId = currentUser.uid
-
+            val identificacionUsuario = "1123432380" // Sustituye por el valor dinámico si es necesario
 
             val tvMenu: TextView = findViewById(R.id.tvMenu)
             setupMenu(tvMenu)
-            // Obtiene los datos del usuario desde Realtime Database
-            database.child("users").child(userId)
+
+            // Consulta al nodo users buscando por el subnodo identificacion
+            database.child("users").orderByChild("identificacion").equalTo(identificacionUsuario)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
-                            val name = snapshot.child("name").getValue(String::class.java) ?: "N/A"
-                            val identificacion =
-                                snapshot.child("identificacion").getValue(String::class.java)
-                                    ?: "N/A"
-                            val equipo =
-                                snapshot.child("equipo").getValue(String::class.java) ?: "N/A"
-                            val fechaNacimiento =
-                                snapshot.child("fechaNacimiento").getValue(String::class.java)
-                                    ?: "N/A"
-                            val categoria =
-                                snapshot.child("categoria").getValue(String::class.java) ?: "N/A"
-                            val telefono =
-                                snapshot.child("telefono").getValue(String::class.java) ?: "N/A"
-                            val photoBase64 = snapshot.child("photo").getValue(String::class.java)
+                            for (userSnapshot in snapshot.children) {
+                                val name = userSnapshot.child("name").getValue(String::class.java) ?: "N/A"
+                                val identificacion =
+                                    userSnapshot.child("identificacion").getValue(String::class.java)
+                                        ?: "N/A"
+                                val equipo =
+                                    userSnapshot.child("equipo").getValue(String::class.java) ?: "N/A"
+                                val fechaNacimiento =
+                                    userSnapshot.child("fechaNacimiento").getValue(String::class.java)
+                                        ?: "N/A"
+                                val categoria =
+                                    userSnapshot.child("categoria").getValue(String::class.java) ?: "N/A"
+                                val telefono =
+                                    userSnapshot.child("telefono").getValue(String::class.java) ?: "N/A"
+                                val photoBase64 = userSnapshot.child("photo").getValue(String::class.java)
 
-                            // Muestra los datos
-                            nombreTextView.text = "Nombre: $name"
-                            identificacionTextView.text = "Identificación: $identificacion"
-                            equipoTextView.text = "Equipo: $equipo"
-                            fechaNacimientoTextView.text = "Fecha de Nacimiento: $fechaNacimiento"
-                            categoriaTextView.text = "Categoría: $categoria"
-                            telefonoTextView.text = "Teléfono: $telefono"
+                                // Muestra los datos
+                                nombreTextView.text = "Nombre: $name"
+                                identificacionTextView.text = "Identificación: $identificacion"
+                                equipoTextView.text = "Equipo: $equipo"
+                                fechaNacimientoTextView.text = "Fecha de Nacimiento: $fechaNacimiento"
+                                categoriaTextView.text = "Categoría: $categoria"
+                                telefonoTextView.text = "Teléfono: $telefono"
 
-                            // Obtener el correo del usuario desde Firebase Authentication
-                            val correo = currentUser.email ?: "Correo no disponible"
-                            correoTextView.text = "Correo: $correo"
+                                // Obtener el correo del usuario desde Firebase Authentication
+                                val correo = currentUser.email ?: "Correo no disponible"
+                                correoTextView.text = "Correo: $correo"
 
-                            // Si hay una foto almacenada, la decodificamos y mostramos
-                            if (photoBase64 != null) {
-                                val decodedBytes = Base64.decode(photoBase64, Base64.DEFAULT)
-                                val bitmap = BitmapFactory.decodeByteArray(
-                                    decodedBytes,
-                                    0,
-                                    decodedBytes.size
-                                )
-                                fotoDeportista.setImageBitmap(bitmap)
+                                // Si hay una foto almacenada, la decodificamos y mostramos
+                                if (photoBase64 != null) {
+                                    val decodedBytes = Base64.decode(photoBase64, Base64.DEFAULT)
+                                    val bitmap = BitmapFactory.decodeByteArray(
+                                        decodedBytes,
+                                        0,
+                                        decodedBytes.size
+                                    )
+                                    fotoDeportista.setImageBitmap(bitmap)
+                                }
                             }
                         } else {
                             Toast.makeText(

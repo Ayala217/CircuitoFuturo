@@ -135,16 +135,25 @@ class inscripcion : Menu() {
         torneo: String
     ) {
         val user = User(name, identificacion, equipo, fechaNacimiento, categoria, telefono)
+        val userRef = FirebaseDatabase.getInstance().getReference("users")
 
-        // Guardar bajo el nodo del torneo seleccionado
-        mDbRef.child(torneo).child(identificacion).setValue(user).addOnCompleteListener {
-            if (it.isSuccessful) {
-                Toast.makeText(this, "Inscripción exitosa en $torneo", Toast.LENGTH_SHORT).show()
+        // Guardar en el nodo del torneo seleccionado
+        mDbRef.child(torneo).child(identificacion).setValue(user).addOnCompleteListener { torneoTask ->
+            if (torneoTask.isSuccessful) {
+                // Guardar también en el nodo 'users'
+                userRef.child(identificacion).setValue(user).addOnCompleteListener { userTask ->
+                    if (userTask.isSuccessful) {
+                        Toast.makeText(this, "Inscripción exitosa en $torneo y perfil actualizado", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Inscripción en torneo exitosa, pero hubo un error al actualizar el perfil.", Toast.LENGTH_SHORT).show()
+                    }
+                }
             } else {
                 Toast.makeText(this, "Error al inscribir en $torneo", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
     data class User(
         val name: String,
