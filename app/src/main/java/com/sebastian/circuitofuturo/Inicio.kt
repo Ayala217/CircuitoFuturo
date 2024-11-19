@@ -11,7 +11,7 @@ class Inicio : Menu() {
 
     private lateinit var ivRotatingImage: ImageView
     private val images = arrayOf(
-        R.drawable.image1,  // Reemplaza con los nombres de tus imágenes
+        R.drawable.image1,
         R.drawable.image2,
         R.drawable.image3
     )

@@ -18,6 +18,15 @@
         android:theme="@style/Theme.CircuitoFuturo"
         tools:targetApi="31">
         <activity
+            android:name=".NuevosAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Partidos"
+            android:exported="false" />
+        <activity
             android:name=".Inscritos"
             android:exported="false" />
         <activity

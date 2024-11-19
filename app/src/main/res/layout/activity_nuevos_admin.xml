@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    tools:context=".Login">
+
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Circuito Futuro"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="16dp" />
+
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/descarga"
+        android:scaleType="centerCrop"
+
+        android:contentDescription="Logo" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="24dp"
+        android:background="#E0E0E0"
+        android:layout_marginHorizontal="32dp"
+        android:elevation="4dp"
+
+        >
+
+        <!-- Campo de Usuario -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correo"
+            android:textColor="#000000"
+            android:textSize="16sp"
+
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="********"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Campo de Contraseña -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contraseña"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="****************"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_marginTop="18dp"
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:text="Registarse aquí!"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onRegisterClick"/>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnLogin"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIGUIENTE"
+        android:backgroundTint="#37474F"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginTop="45dp"
+        android:paddingHorizontal="32dp"
+
+        android:layout_gravity="center_horizontal"
+        android:elevation="4dp"
+        android:drawablePadding="8dp" />
+</LinearLayout>

@@ -24,18 +24,15 @@ class Login : AppCompatActivity() {
         supportActionBar?.hide()
         mAuth = FirebaseAuth.getInstance()
 
-
         editEmail = findViewById(R.id.etEmail)
         editPassword = findViewById(R.id.etPassword)
         editLogIn = findViewById(R.id.btnLogin)
         editSignUp = findViewById(R.id.tvRegister)
 
-
         editSignUp.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
 
         editLogIn.setOnClickListener {
             val email = editEmail.text.toString()
@@ -48,9 +45,27 @@ class Login : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this@Login, Inicio::class.java)
-                    finish()
-                    startActivity(intent)
+                    // Verificar si el correo es del administrador
+                    if (email == "jsayala217@gmail.com") {
+                        Toast.makeText(
+                            this@Login,
+                            "Bienvenido, Admin!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        // Redirigir a una pantalla de administrador si es necesario
+                        val adminIntent = Intent(this@Login, AdminActivity::class.java)
+                        finish()
+                        startActivity(adminIntent)
+                    } else {
+                        Toast.makeText(
+                            this@Login,
+                            "Inicio de sesión exitoso",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val userIntent = Intent(this@Login, Inicio::class.java)
+                        finish()
+                        startActivity(userIntent)
+                    }
                 } else {
                     Toast.makeText(
                         this@Login,
