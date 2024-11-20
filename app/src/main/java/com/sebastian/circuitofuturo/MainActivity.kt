@@ -9,9 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
-
 
     private lateinit var editEmail: EditText
     private lateinit var editPassword: EditText
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         mAuth = FirebaseAuth.getInstance()
-
+        mDbRef = FirebaseDatabase.getInstance().reference
 
         editEmail = findViewById(R.id.etCorreo)
         editPassword = findViewById(R.id.etPassword)
@@ -36,15 +36,12 @@ class MainActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btLogin)
         tvAlreadyHaveAccount = findViewById(R.id.tvAlreadyHaveAccount)
 
-
         btnSignUp.setOnClickListener {
-
             val email = editEmail.text.toString()
             val password = editPassword.text.toString()
 
-            signUp( email, password)
+            signUp(email, password)
         }
-
 
         btnLogin.setOnClickListener {
             val email = editEmail.text.toString()
@@ -53,39 +50,63 @@ class MainActivity : AppCompatActivity() {
             loginAndCheckVerification(email, password)
         }
 
-
         tvAlreadyHaveAccount.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
     }
 
-    private fun signUp( email: String, password: String) {
+    private fun signUp(email: String, password: String) {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    val user = mAuth.currentUser
+                    if (user != null) {
+                        user.sendEmailVerification()
+                            .addOnCompleteListener { emailTask ->
+                                if (emailTask.isSuccessful) {
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        "Verifica tu correo antes de continuar.",
+                                        Toast.LENGTH_LONG
+                                    ).show()
 
-                    mAuth.currentUser?.sendEmailVerification()
-                        ?.addOnCompleteListener { emailTask ->
-                            if (emailTask.isSuccessful) {
-                                Toast.makeText(
-                                    this@MainActivity,
-                                    "Verifica tu correo antes de continuar.",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            } else {
-                                Toast.makeText(
-                                    this@MainActivity,
-                                    "Error al enviar el correo de verificación.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                    // Agregar el usuario a la base de datos con rol "participante"
+                                    saveUserToDatabase(user.uid, email, "participante")
+                                } else {
+                                    // Manejar el error al enviar el correo de verificación
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        "Error al enviar el correo de verificación: ${emailTask.exception?.message}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
-                        }
+                    }
                 } else {
+                    // Manejar el error de creación de usuario
                     Toast.makeText(
-                        this@MainActivity, "Ha ocurrido un error", Toast.LENGTH_SHORT,
+                        this@MainActivity,
+                        "Error al crear el usuario: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
+            }
+    }
+
+
+    private fun saveUserToDatabase(userId: String, email: String, role: String) {
+        val user = hashMapOf(
+            "email" to email,
+            "role" to role
+        )
+
+        mDbRef.child("users").child(userId).setValue(user)
+            .addOnCompleteListener {
+                Toast.makeText(this@MainActivity, "Usuario guardado como participante", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this@MainActivity, "Error al guardar usuario: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -95,7 +116,6 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     mAuth.currentUser?.reload()?.addOnCompleteListener { reloadTask ->
                         if (reloadTask.isSuccessful && mAuth.currentUser?.isEmailVerified == true) {
-
                             val intent = Intent(this@MainActivity, Inicio::class.java)
                             startActivity(intent)
                             finish()

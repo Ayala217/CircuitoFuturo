@@ -8,15 +8,16 @@
     tools:context=".AdminActivity">
 
 
-    <!-- ImageView para la imagen superior -->
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="41dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="36dp">
 
         <TextView
             android:id="@+id/tvTitle"
@@ -40,11 +41,23 @@
             android:textSize="18sp" />
     </LinearLayout>
 
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu de administrador"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="115dp" />
+
     <ImageView
         android:id="@+id/adminImageView"
         android:layout_width="431dp"
         android:layout_height="211dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="196dp"
         android:scaleType="centerCrop"
         android:src="@drawable/fondo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- FrameLayout para contener el Botón Torneos PDF -->
+
     <FrameLayout
         android:id="@+id/frameBtnTorneosPdf"
         android:layout_width="wrap_content"
@@ -67,18 +80,20 @@
             android:id="@+id/btnTorneosPdf"
             android:layout_width="419dp"
             android:layout_height="156dp"
-
             android:background="@drawable/button_border"
+
+            android:backgroundTint="@color/blue"
             android:text="Torneos PDF"
             android:textColor="@android:color/white"
             android:textSize="35dp" />
     </FrameLayout>
 
-    <!-- FrameLayout para contener el Botón Crear Partidos -->
+
     <FrameLayout
         android:id="@+id/frameBtnCrearPartidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
 
         app:layout_constraintEnd_toStartOf="@id/frameBtnCrearAdmins"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,18 +103,19 @@
             android:id="@+id/btnCrearPartidos"
             android:layout_width="237dp"
             android:layout_height="114dp"
-            android:background="@android:color/holo_green_light"
+            android:background="@drawable/button_border"
             android:paddingLeft="25dp"
             android:text="Crear Partidos"
             android:textColor="@android:color/white"
             android:textSize="22dp" />
     </FrameLayout>
 
-    <!-- FrameLayout para contener el Botón Crear Administradores -->
+
     <FrameLayout
         android:id="@+id/frameBtnCrearAdmins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/frameBtnCrearPartidos"
@@ -109,7 +125,8 @@
             android:id="@+id/btnCrearAdmins"
             android:layout_width="223dp"
             android:layout_height="114dp"
-            android:background="@android:color/holo_red_light"
+            android:background="@drawable/button_border"
+
             android:text="Crear Administradores"
             android:textColor="@android:color/white"
             android:textSize="22dp" />

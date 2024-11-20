@@ -41,7 +41,7 @@ open class Menu : AppCompatActivity() {
                     true
                 }
                 R.id.Ranking -> {
-                    val intent = Intent(this@Menu, MainActivity::class.java)
+                    val intent = Intent(this@Menu, NuevosAdminActivity::class.java)
                     startActivity(intent)
                     true
                 }
