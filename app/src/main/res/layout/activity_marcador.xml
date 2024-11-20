@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9F9"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Circuito Futuro"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_gravity="start" />
+
+        <TextView
+            android:id="@+id/tvMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu ▼"
+            android:textSize="18sp"
+            android:textColor="#007AFF"
+            android:layout_gravity="end"
+            android:paddingTop="8dp" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="La persona que gana el partido es quien debe ingresar el resultado \n \n En cada recuadro escriba los games, en la primera fila los del ganador y en la segund fila los de su contrincante"
+
+
+
+        <!-- Match scores -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <!-- EditText for set scores -->
+            <EditText
+                android:id="@+id/editSet1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="Set 1"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:layout_marginHorizontal="8dp" />
+
+            <EditText
+                android:id="@+id/editSet2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="Set 2"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:layout_marginHorizontal="8dp" />
+
+            <EditText
+                android:id="@+id/editSet3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="Set 3"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:layout_marginHorizontal="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/editSet4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="Set 1"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:layout_marginHorizontal="8dp" />
+
+            <EditText
+                android:id="@+id/editSet5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="Set 2"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:layout_marginHorizontal="8dp" />
+
+            <EditText
+                android:id="@+id/editSet6"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="Set 3"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:layout_marginHorizontal="8dp" />
+        </LinearLayout>
+
+        <!-- Submit button -->
+        <Button
+            android:id="@+id/btnSubirMarcador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SUBIR MARCADOR"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>
