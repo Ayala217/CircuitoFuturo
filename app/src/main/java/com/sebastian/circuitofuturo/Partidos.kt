@@ -1,6 +1,8 @@
 package com.sebastian.circuitofuturo
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,5 +18,11 @@ class Partidos : Menu() {
         val tvMenu: TextView = findViewById(R.id.tvMenu)
         setupMenu(tvMenu)
 
+        val btnMarcador= findViewById<Button>(R.id.btMarcador)
+
+        btnMarcador.setOnClickListener {
+            val intent = Intent(this@Partidos, marcador::class.java)
+            startActivity(intent)
+        }
     }
 }

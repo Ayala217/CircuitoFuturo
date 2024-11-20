@@ -46,7 +46,7 @@ open class Menu : AppCompatActivity() {
                     true
                 }
                 R.id.Partidos -> {
-                    val intent = Intent(this@Menu, MainActivity::class.java)
+                    val intent = Intent(this@Menu, Partidos::class.java)
                     startActivity(intent)
                     true
                 }
@@ -75,6 +75,12 @@ open class Menu : AppCompatActivity() {
 
                 R.id.inscritos -> {
                     val intent = Intent(this@Menu, Inscritos::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.Administradores -> {
+                    val intent = Intent(this@Menu, AdminActivity::class.java)
                     startActivity(intent)
                     true
                 }

@@ -41,4 +41,8 @@
         android:id="@+id/Galeria"
         android:title="Galería" />
 
+    <item
+        android:id="@+id/Administradores"
+        android:title="Administradores" />
+
 </menu>
