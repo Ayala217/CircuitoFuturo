@@ -1,141 +1,126 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F9F9F9"
-    android:padding="16dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="16dp">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Circuito Futuro"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Menú -->
+    <TextView
+        android:id="@+id/tvMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu ▼"
+        android:textSize="18sp"
+        android:layout_gravity="end"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="La persona que gana el partido es quien debe ingresar el resultado \n \n En cada recuadro escriba los games, en la primera fila los del ganador y en la segund fila los de su contrincante "
+        />
+
+    <!-- Selección de Torneo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\nSelecciona el torneo:"
+        android:layout_marginBottom="8dp" />
+    <Spinner
+        android:id="@+id/spinnerTorneo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Selección de Categoría -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona la categoría:"
+        android:layout_marginBottom="8dp" />
+    <Spinner
+        android:id="@+id/spinnerCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Selección de Jugador -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona el jugador:"
+        android:layout_marginBottom="8dp" />
+    <Spinner
+        android:id="@+id/spinnerJugador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Marcadores -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingresa el marcador:"
+        android:layout_marginBottom="8dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/tvTitulo"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etSet1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Circuito Futuro"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
-            android:layout_gravity="start" />
+            android:layout_weight="1"
+            android:hint="Set 1"
+            android:inputType="number" />
 
-        <TextView
-            android:id="@+id/tvMenu"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etSet2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Menu ▼"
-            android:textSize="18sp"
-            android:textColor="#007AFF"
-            android:layout_gravity="end"
-            android:paddingTop="8dp" />
+            android:layout_weight="1"
+            android:hint="Set 2"
+            android:inputType="number"
+            android:layout_marginStart="8dp" />
 
-        <TextView
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/etSet3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="La persona que gana el partido es quien debe ingresar el resultado \n \n En cada recuadro escriba los games, en la primera fila los del ganador y en la segund fila los de su contrincante"
-
-
-
-        <!-- Match scores -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:layout_marginBottom="16dp">
-
-            <!-- EditText for set scores -->
-            <EditText
-                android:id="@+id/editSet1"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="center"
-                android:hint="Set 1"
-                android:textSize="18sp"
-                android:inputType="number"
-                android:layout_marginHorizontal="8dp" />
-
-            <EditText
-                android:id="@+id/editSet2"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="center"
-                android:hint="Set 2"
-                android:textSize="18sp"
-                android:inputType="number"
-                android:layout_marginHorizontal="8dp" />
-
-            <EditText
-                android:id="@+id/editSet3"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="center"
-                android:hint="Set 3"
-                android:textSize="18sp"
-                android:inputType="number"
-                android:layout_marginHorizontal="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="16dp">
-
-            <EditText
-                android:id="@+id/editSet4"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="center"
-                android:hint="Set 1"
-                android:textSize="18sp"
-                android:inputType="number"
-                android:layout_marginHorizontal="8dp" />
-
-            <EditText
-                android:id="@+id/editSet5"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="center"
-                android:hint="Set 2"
-                android:textSize="18sp"
-                android:inputType="number"
-                android:layout_marginHorizontal="8dp" />
-
-            <EditText
-                android:id="@+id/editSet6"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="center"
-                android:hint="Set 3"
-                android:textSize="18sp"
-                android:inputType="number"
-                android:layout_marginHorizontal="8dp" />
-        </LinearLayout>
-
-        <!-- Submit button -->
-        <Button
-            android:id="@+id/btnSubirMarcador"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SUBIR MARCADOR"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="16dp" />
+            android:layout_weight="1"
+            android:hint="Set 3"
+            android:inputType="number"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
+
+    <!-- Botón para subir marcador -->
+    <Button
+        android:id="@+id/btnSubirMarcador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUBIR MARCADOR"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textColor="@android:color/white" />
+</LinearLayout>
 </ScrollView>
