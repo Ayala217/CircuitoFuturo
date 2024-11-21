@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecoverPass">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Digite su email"
+        android:textSize="31sp"
+        android:textStyle="bold"
+        android:id="@+id/etiqueta"
+        android:paddingTop="20dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtrecovery"
+        android:hint="correo@correo.com"
+        android:layout_below="@+id/etiqueta"
+        android:paddingTop="10dp"/>
+    <Button
+        android:id="@+id/recuperar"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtrecovery"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="Recuperar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+
+</RelativeLayout>

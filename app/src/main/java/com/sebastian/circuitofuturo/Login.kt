@@ -19,6 +19,7 @@ class Login : AppCompatActivity() {
     private lateinit var editSignUp: TextView
     private lateinit var userTypeGroup: RadioGroup
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var btnForgot: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class Login : AppCompatActivity() {
         editLogIn = findViewById(R.id.btnLogin)
         editSignUp = findViewById(R.id.tvRegister)
         userTypeGroup = findViewById(R.id.rgUserType)
+        btnForgot= findViewById(R.id.tvForgot)
 
         // Establecer el listener del RadioGroup para manejar el cambio de los RadioButton
         userTypeGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -59,6 +61,12 @@ class Login : AppCompatActivity() {
         // Lógica para abrir la pantalla de registro
         editSignUp.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Lógica para abrir la pantalla de registro
+        btnForgot.setOnClickListener {
+            val intent = Intent(this, RecoverPass::class.java)
             startActivity(intent)
         }
 
