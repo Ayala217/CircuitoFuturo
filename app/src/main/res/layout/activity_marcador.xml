@@ -113,6 +113,39 @@ android:padding="16dp">
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/etSet11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Set 1"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/etSet22"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Set 2"
+            android:inputType="number"
+            android:layout_marginStart="8dp" />
+
+        <EditText
+            android:id="@+id/etSet33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Set 3"
+            android:inputType="number"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
     <!-- Botón para subir marcador -->
     <Button
         android:id="@+id/btnSubirMarcador"

@@ -29,10 +29,6 @@
     <item
         android:id="@+id/Partidos"
         android:title="Partidos" />
-    <item
-        android:id="@+id/Torneos"
-        android:title="Torneos" />
-
 
     <item
         android:id="@+id/inscritos"

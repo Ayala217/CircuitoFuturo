@@ -41,7 +41,7 @@ open class Menu : AppCompatActivity() {
                     true
                 }
                 R.id.Ranking -> {
-                    val intent = Intent(this@Menu, NuevosAdminActivity::class.java)
+                    val intent = Intent(this@Menu, Ranking::class.java)
                     startActivity(intent)
                     true
                 }
@@ -50,11 +50,7 @@ open class Menu : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.Torneos -> {
-                    val intent = Intent(this@Menu, MainActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
+               
                 R.id.Galeria -> {
                     val intent = Intent(this@Menu, Galeria::class.java)
                     startActivity(intent)

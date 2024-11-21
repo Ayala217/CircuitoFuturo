@@ -14,6 +14,9 @@ class marcador : AppCompatActivity() {
     private lateinit var etSet1: EditText
     private lateinit var etSet2: EditText
     private lateinit var etSet3: EditText
+    private lateinit var etSet11: EditText
+    private lateinit var etSet22: EditText
+    private lateinit var etSet33: EditText
     private lateinit var btnSubirMarcador: Button
     private lateinit var mDbRef: DatabaseReference
 
@@ -31,6 +34,9 @@ class marcador : AppCompatActivity() {
         etSet1 = findViewById(R.id.etSet1)
         etSet2 = findViewById(R.id.etSet2)
         etSet3 = findViewById(R.id.etSet3)
+        etSet11 = findViewById(R.id.etSet11)
+        etSet22 = findViewById(R.id.etSet22)
+        etSet33 = findViewById(R.id.etSet33)
         btnSubirMarcador = findViewById(R.id.btnSubirMarcador)
 
         // Configurar spinners
@@ -104,6 +110,9 @@ class marcador : AppCompatActivity() {
         val set1 = etSet1.text.toString()
         val set2 = etSet2.text.toString()
         val set3 = etSet3.text.toString()
+        val set11 = etSet11.text.toString()
+        val set22 = etSet22.text.toString()
+        val set33 = etSet33.text.toString()
 
         if (torneoSeleccionado.isNullOrEmpty() || categoriaSeleccionada.isNullOrEmpty() || jugadorSeleccionado.isNullOrEmpty()) {
             Toast.makeText(this, "Por favor, selecciona todos los campos.", Toast.LENGTH_SHORT).show()
@@ -114,7 +123,10 @@ class marcador : AppCompatActivity() {
             "jugador" to jugadorSeleccionado,
             "set1" to set1,
             "set2" to set2,
-            "set3" to set3
+            "set3" to set3,
+            "set11" to set11,
+            "set22" to set22,
+            "set33" to set33
         )
 
         mDbRef.child(torneoSeleccionado).child(categoriaSeleccionada).child("marcadores").push()
